@@ -1038,6 +1038,7 @@ select.form-control {
   padding: var(--space-4) var(--space-8);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-xs);
+  cursor: pointer;
 }
 
 .time-badge.taken {
@@ -1045,30 +1046,32 @@ select.form-control {
   color: var(--color-btn-primary-text);
 }
 
-.dosage-controls {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  margin-top: var(--space-12);
+.inventory-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-top: var(--space-16);
+    font-size: var(--font-size-sm);
 }
 
-.dosage-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-secondary);
-  color: var(--color-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: var(--font-weight-bold);
+.inventory-controls label {
+    font-weight: var(--font-weight-medium);
 }
 
-.dosage-btn:hover {
-  background: var(--color-secondary-hover);
+.inventory-input {
+    width: 60px;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    text-align: center;
 }
+
+.inventory-input.low-stock {
+    color: var(--color-error);
+    border-color: var(--color-error);
+}
+
 
 /* Diet Styles */
 .diet-grid {
@@ -1107,6 +1110,7 @@ select.form-control {
   border-radius: 0 0 var(--radius-base) var(--radius-base);
   position: relative;
   background: var(--color-surface);
+  cursor: pointer;
 }
 
 .water-glass.filled {
@@ -1457,26 +1461,32 @@ select.form-control {
 }
 
 /* Workout Modal */
-#workoutContent {
-  margin: var(--space-20) 0;
+#workoutInfo {
+    margin-bottom: var(--space-20);
+    padding: var(--space-16);
+    background-color: var(--color-bg-8);
+    border-radius: var(--radius-base);
 }
 
-.exercise-item {
-  background: var(--color-bg-8);
-  border-radius: var(--radius-base);
-  padding: var(--space-16);
-  margin-bottom: var(--space-12);
+#workoutTimerContainer {
+    text-align: center;
+    margin: var(--space-24) 0;
 }
 
-.exercise-item h4 {
-  margin: 0 0 var(--space-8) 0;
-  color: var(--color-text);
+#workoutTimerDisplay {
+    font-size: 4rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-family: var(--font-family-mono);
+    margin-bottom: var(--space-16);
 }
 
-.exercise-duration {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-12);
 }
+
 
 /* Meal Modal */
 #mealOptions {
