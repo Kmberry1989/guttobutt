@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gut Health Recovery Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🌟 Gut Health Journey</h1>
+                <div class="user-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Level</span>
+                        <span class="stat-value" id="userLevel">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Points</span>
+                        <span class="stat-value" id="userPoints">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value" id="userStreak">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <button class="nav-btn active" data-tab="dashboard">📊 Dashboard</button>
+            <button class="nav-btn" data-tab="supplements">💊 Supplements</button>
+            <button class="nav-btn" data-tab="diet">🥗 Nutrition</button>
+            <button class="nav-btn" data-tab="exercise">🏃 Exercise</button>
+            <button class="nav-btn" data-tab="analytics">📈 Progress</button>
+            <button class="nav-btn" data-tab="achievements">🏆 Awards</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card welcome-card">
+                        <h2>Today's Journey</h2>
+                        <p class="date" id="currentDate"></p>
+                        <div class="phase-indicator">
+                            <span class="phase-badge" id="currentPhase">Phase 1: Initiation</span>
+                            <p id="phaseDescription">Starting supplements and diet changes</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card progress-overview">
+                        <h3>Today's Progress</h3>
+                        <div class="progress-circles">
+                            <div class="progress-circle">
+                                <div class="circle" data-progress="0" id="supplementProgress">
+                                    <span class="percentage">0%</span>
+                                </div>
+                                <span class="label">Supplements</span>
+                            </div>
+                            <div class="progress-circle">
+                                <div class="circle" data-progress="0" id="dietProgress">
+                                    <span class="percentage">0%</span>
+                                </div>
+                                <span class="label">Diet</span>
+                            </div>
+                            <div class="progress-circle">
+                                <div class="circle" data-progress="0" id="exerciseProgress">
+                                    <span class="percentage">0%</span>
+                                </div>
+                                <span class="label">Exercise</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card quick-tasks">
+                        <h3>Quick Tasks</h3>
+                        <div class="task-list" id="quickTasks">
+                            <!-- Tasks will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card motivation">
+                        <h3>💪 Daily Motivation</h3>
+                        <p id="motivationalMessage">Every small step counts towards your healing journey!</p>
+                        <button class="btn btn--primary" onclick="generateMotivation()">New Message</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Supplements Tab -->
+            <section id="supplements" class="tab-content">
+                <div class="section-header">
+                    <h2>💊 Supplement Tracker</h2>
+                    <button class="btn btn--outline" onclick="exportData()">📤 Export Data</button>
+                </div>
+                
+                <div class="supplements-grid" id="supplementsContainer">
+                    <!-- Supplements will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Diet Tab -->
+            <section id="diet" class="tab-content">
+                <div class="section-header">
+                    <h2>🥗 Nutrition & Diet</h2>
+                    <div class="diet-stats">
+                        <span>Fiber Goal: <strong id="fiberGoal">30g</strong></span>
+                        <span>Water Goal: <strong>2L</strong></span>
+                    </div>
+                </div>
+
+                <div class="diet-grid">
+                    <div class="diet-card">
+                        <h3>🚰 Water Intake</h3>
+                        <div class="water-tracker">
+                            <div class="water-glasses" id="waterGlasses">
+                                <!-- Water glasses will be generated by JS -->
+                            </div>
+                            <div class="water-controls">
+                                <button class="btn btn--secondary" onclick="addWater()">+250ml</button>
+                                <span id="waterCount">0ml / 2000ml</span>
+                                <button class="btn btn--outline" onclick="resetWater()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diet-card">
+                        <h3>🌾 Fiber Tracker</h3>
+                        <div class="fiber-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="fiberProgress" style="width: 0%"></div>
+                            </div>
+                            <span id="fiberCount">0g / 30g</span>
+                        </div>
+                        <button class="btn btn--secondary" onclick="addFiber()">+5g Fiber</button>
+                    </div>
+
+                    <div class="diet-card meal-planning">
+                        <h3>🍽️ Meal Planning</h3>
+                        <div class="meal-grid">
+                            <div class="meal-slot" onclick="planMeal('breakfast')">
+                                <h4>Breakfast</h4>
+                                <p id="breakfastMeal">Click to plan</p>
+                            </div>
+                            <div class="meal-slot" onclick="planMeal('lunch')">
+                                <h4>Lunch</h4>
+                                <p id="lunchMeal">Click to plan</p>
+                            </div>
+                            <div class="meal-slot" onclick="planMeal('dinner')">
+                                <h4>Dinner</h4>
+                                <p id="dinnerMeal">Click to plan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diet-card prebiotic-checklist">
+                        <h3>🌱 Prebiotic Foods</h3>
+                        <div class="checklist" id="prebioticChecklist">
+                            <!-- Prebiotic foods will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise Tab -->
+            <section id="exercise" class="tab-content">
+                <div class="section-header">
+                    <h2>🏃 Exercise Tracker</h2>
+                    <div class="exercise-summary">
+                        <span>This Week: <strong id="weeklyExercise">0/5</strong> sessions</span>
+                    </div>
+                </div>
+
+                <div class="exercise-grid">
+                    <div class="exercise-schedule">
+                        <h3>📅 Weekly Schedule</h3>
+                        <div class="schedule-grid" id="exerciseSchedule">
+                            <!-- Exercise schedule will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="exercise-tracker">
+                        <h3>🎯 Today's Workout</h3>
+                        <div id="todaysWorkout">
+                            <p>No workout scheduled for today</p>
+                        </div>
+                        <button class="btn btn--primary" onclick="startWorkout()">Start Workout</button>
+                        <button class="btn btn--secondary" onclick="logCustomWorkout()">Log Custom</button>
+                    </div>
+
+                    <div class="exercise-history">
+                        <h3>📊 Recent Activity</h3>
+                        <div id="exerciseHistory">
+                            <p>No recent workouts logged</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Tab -->
+            <section id="analytics" class="tab-content">
+                <div class="section-header">
+                    <h2>📈 Progress Analytics</h2>
+                    <div class="analytics-controls">
+                        <select id="analyticsTimeframe" class="form-control">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>📊 Daily Compliance</h3>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="complianceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>😊 Mood & Energy</h3>
+                        <div class="mood-tracker">
+                            <div class="mood-rating">
+                                <label>Today's Energy Level:</label>
+                                <div class="star-rating" id="energyRating">
+                                    <span class="star" data-rating="1">⭐</span>
+                                    <span class="star" data-rating="2">⭐</span>
+                                    <span class="star" data-rating="3">⭐</span>
+                                    <span class="star" data-rating="4">⭐</span>
+                                    <span class="star" data-rating="5">⭐</span>
+                                </div>
+                            </div>
+                            <div class="mood-rating">
+                                <label>Today's Mood:</label>
+                                <div class="star-rating" id="moodRating">
+                                    <span class="star" data-rating="1">⭐</span>
+                                    <span class="star" data-rating="2">⭐</span>
+                                    <span class="star" data-rating="3">⭐</span>
+                                    <span class="star" data-rating="4">⭐</span>
+                                    <span class="star" data-rating="5">⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>💤 Sleep Quality</h3>
+                        <div class="sleep-tracker">
+                            <input type="range" min="4" max="12" value="8" id="sleepHours" class="form-control">
+                            <label>Hours slept: <span id="sleepValue">8</span>h</label>
+                            <div class="sleep-quality">
+                                <label>Sleep Quality:</label>
+                                <div class="quality-buttons">
+                                    <button class="btn btn--outline quality-btn" data-quality="poor">Poor</button>
+                                    <button class="btn btn--outline quality-btn" data-quality="fair">Fair</button>
+                                    <button class="btn btn--outline quality-btn" data-quality="good">Good</button>
+                                    <button class="btn btn--outline quality-btn" data-quality="excellent">Excellent</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card symptoms">
+                        <h3>🎯 Symptom Tracking</h3>
+                        <div class="symptom-sliders">
+                            <div class="symptom-item">
+                                <label>Tremor Severity (0-10):</label>
+                                <input type="range" min="0" max="10" value="5" id="tremorSeverity" class="form-control">
+                                <span id="tremorValue">5</span>
+                            </div>
+                            <div class="symptom-item">
+                                <label>Stiffness (0-10):</label>
+                                <input type="range" min="0" max="10" value="5" id="stiffnessSeverity" class="form-control">
+                                <span id="stiffnessValue">5</span>
+                            </div>
+                            <div class="symptom-item">
+                                <label>Balance Issues (0-10):</label>
+                                <input type="range" min="0" max="10" value="5" id="balanceSeverity" class="form-control">
+                                <span id="balanceValue">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Tab -->
+            <section id="achievements" class="tab-content">
+                <div class="section-header">
+                    <h2>🏆 Achievements</h2>
+                    <div class="achievement-summary">
+                        <span>Unlocked: <strong id="unlockedCount">0</strong> / <strong id="totalCount">6</strong></span>
+                    </div>
+                </div>
+
+                <div class="achievements-grid" id="achievementsContainer">
+                    <!-- Achievements will be populated by JavaScript -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Modals -->
+        <div id="workoutModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal('workoutModal')">&times;</span>
+                <h3>🏃 Workout Session</h3>
+                <div id="workoutContent">
+                    <!-- Workout content will be populated by JavaScript -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn--primary" onclick="completeWorkout()">Complete Workout</button>
+                    <button class="btn btn--outline" onclick="closeModal('workoutModal')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mealModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal('mealModal')">&times;</span>
+                <h3>🍽️ Plan Your Meal</h3>
+                <div id="mealOptions">
+                    <!-- Meal options will be populated by JavaScript -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn--primary" onclick="saveMeal()">Save Meal</button>
+                    <button class="btn btn--outline" onclick="closeModal('mealModal')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
