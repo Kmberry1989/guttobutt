@@ -311,8 +311,16 @@
             <div class="modal-content">
                 <span class="modal-close" onclick="closeModal('workoutModal')">&times;</span>
                 <h3>🏃 Workout Session</h3>
-                <div id="workoutContent">
-                    <!-- Workout content will be populated by JavaScript -->
+                <div id="workoutInfo">
+                     <!-- Workout info will be populated by JavaScript -->
+                </div>
+                <div id="workoutTimerContainer">
+                    <div id="workoutTimerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button id="timerStartBtn" class="btn btn--primary">Start</button>
+                        <button id="timerPauseBtn" class="btn btn--secondary hidden">Pause</button>
+                        <button id="timerResetBtn" class="btn btn--outline">Reset</button>
+                    </div>
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn--primary" onclick="completeWorkout()">Complete Workout</button>
@@ -338,6 +346,7 @@
 
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
